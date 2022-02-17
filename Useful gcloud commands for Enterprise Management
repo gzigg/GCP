@@ -1,0 +1,11 @@
+# this gcloud command dumps all instances with an existing internal IP address and filters out null values found on the interfaces (so it only prints populated interfaces):
+#  REPLACE the ORG ID for the scope variable
+
+gcloud asset search-all-resources --scope=organizations/12345678901 --asset-types=compute.googleapis
+.com/Instance \
+--filter="additionalAttributes.internalIPs[0]:*" \
+--format="table[box](displayName, additionalAttributes.internalIPs[0], networkTags[0], networkTags[1
+], networkTags[2], parentFullResourceName)"
+
+##### remember to set the screen for pretty printing using (to see the table box!)
+gcloud config set accessibility/screen_reader false
